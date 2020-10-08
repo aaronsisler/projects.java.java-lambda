@@ -22,26 +22,19 @@ public class KafkaService {
     }
 
     public void findFile() {
-        String fileName = "/src/main/resources/thing.txt";
-        String userDir = System.getProperty("user.dir");
-        System.out.println(userDir);
-        String fileLocation = userDir + fileName;
-        File f = new File(fileLocation);
-        System.out.println(fileLocation);
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream("thing.txt");
+        String filePath = classLoader.getResource("thing.txt").getPath();
+        File f = new File(filePath);
+        System.out.println(filePath);
         if (f.exists()) {
             System.out.println("Yes");
         } else {
             System.out.println("No");
         }
 
-
         String content = "";
 
-
-        ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("thing.txt");
-        String filePath = classLoader.getResource("thing.txt").getPath();
-        System.out.println(filePath);
         try (InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
              BufferedReader reader = new BufferedReader(streamReader)) {
 
@@ -54,12 +47,6 @@ public class KafkaService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        try {
-//            content = new String(Files.readAllBytes(Paths.get(fileLocation)));
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
 
         System.out.println(content);
     }
