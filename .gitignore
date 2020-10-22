@@ -1,3 +1,17 @@
-target/
-.idea/
+*.class
+target
+/bin/
+/.settings/
+.project
+.classpath
+.idea
+.vscode
 node_modules/
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Serverless directories
+.serverless

@@ -17,9 +17,13 @@ provider:
   environment:
     NODE_ENV: beta
 
+# you can add packaging information here
+package:
+  artifact: target/projects-java-lambda.jar
+
 functions:
   health:
-    handler: com.eandbsolutions.HelloHandler::handleRequest
+    handler: com.eandbsolutions.HelloHandler
     description: Gateway health check. Responds with current time and a short message.
     events:
       - http:

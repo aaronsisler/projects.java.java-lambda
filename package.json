@@ -4,6 +4,7 @@
   "description": "This project is a basic Java project that will be packaged and deployed into a AWS Lambda function.",
   "main": "index.js",
   "scripts": {
+    "domain:beta": "sls create_domain --config=./deploy/serverless.beta.yml",
     "deploy:beta": "sls deploy --config=./deploy/serverless.beta.yml"
   },
   "dependencies": {
