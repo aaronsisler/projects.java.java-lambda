@@ -1,0 +1,37 @@
+service: projects-java-lambda
+
+provider:
+  name: aws
+  runtime: java8
+  stage: beta
+  region: us-east-1
+  role: arn:aws:iam::654918520080:role/APIG-LAMBDA-DDB
+  usagePlan:
+    quota:
+      limit: 500
+      offset: 0
+      period: MONTH
+    throttle:
+      burstLimit: 20
+      rateLimit: 10
+  environment:
+    NODE_ENV: beta
+
+functions:
+  health:
+    handler: com.eandbsolutions.HelloHandler::handleRequest
+    description: Gateway health check. Responds with current time and a short message.
+    events:
+      - http:
+          path: /health
+          method: get
+
+plugins:
+  - serverless-domain-manager
+
+custom:
+  customDomain:
+    domainName: java.otterandcow.com
+    basePath: "beta"
+    stage: beta
+    createRoute53Record: true
