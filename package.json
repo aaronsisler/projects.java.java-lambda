@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/aaronsisler/projects.java.java-lambda/issues"
   },
-  "homepage": "https://github.com/aaronsisler/projects.java.java-lambda#readme"
+  "homepage": "https://github.com/aaronsisler/projects.java.java-lambda#readme",
+  "devDependencies": {
+    "serverless": "^2.8.0"
+  }
 }
