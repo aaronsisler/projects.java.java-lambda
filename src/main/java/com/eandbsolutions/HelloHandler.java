@@ -14,7 +14,7 @@ public class HelloHandler implements RequestHandler<Map<String, Object>, ApiGate
         context.getLogger().log(String.format("received: {}", input));
         Instant instant = new Instant();
         String currentTime = instant.toString();
-        Response responseBody = new Response("Go Serverless v1.x! Your function executed successfully!", input);
+        Response responseBody = new Response(String.format("Hello from Java Lambda. Time is: %s", currentTime), input);
         return ApiGatewayResponse.builder()
                 .setStatusCode(200)
                 .setObjectBody(responseBody)
