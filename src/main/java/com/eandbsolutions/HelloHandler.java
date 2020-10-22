@@ -2,13 +2,15 @@ package com.eandbsolutions;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
+import org.joda.time.Instant;
 
 
 public class HelloHandler implements RequestHandler<Object, ApiGatewayProxyResponse> {
     public ApiGatewayProxyResponse handleRequest(Object input, Context context) {
-        ApiGatewayProxyResponse apiGatewayProxyResponse = new ApiGatewayProxyResponse(200, null, "Hello World!");
+        context.getLogger().log(input.toString());
+        Instant instant = new Instant();
+        String currentTime = instant.toString();
 
-        return apiGatewayProxyResponse;
+        return new ApiGatewayProxyResponse(200, null, String.format("Hello World! The time is %s", currentTime));
     }
-
 }
