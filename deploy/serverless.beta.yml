@@ -29,6 +29,13 @@ functions:
       - http:
           path: /health
           method: get
+  json:
+    handler: com.eandbsolutions.JsonHandler
+    description: Json checker
+    events:
+      - http:
+          path: /json
+          method: get
 
 plugins:
   - serverless-domain-manager
