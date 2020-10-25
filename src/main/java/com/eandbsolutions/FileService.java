@@ -2,28 +2,31 @@ package com.eandbsolutions;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-public class KafkaService {
-    private String taco = "thing";
-
-    public KafkaService() {
+public class FileService {
+    public static void findLocalFile(String filePath) {
+        File f = new File(filePath);
+        System.out.println(filePath);
+        if (f.exists()) {
+            System.out.println("Yes");
+        } else {
+            System.out.println("No");
+        }
+        try {
+            String fileContents = new String(Files.readAllBytes(Paths.get(filePath)));
+            System.out.println(fileContents);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
-    public KafkaService(String taco) {
-        this.taco = taco;
-    }
-
-    public String getTaco() {
-        return taco;
-    }
-
-    public void setTaco(String taco) {
-        this.taco = taco;
-    }
-
-    public void findFile() {
+    public String findResourceFile(String filename) {
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream("thing.txt");
+        InputStream inputStream = classLoader.getResourceAsStream(filename);
         String filePath = classLoader.getResource("thing.txt").getPath();
         File f = new File(filePath);
         System.out.println(filePath);
@@ -49,5 +52,7 @@ public class KafkaService {
         }
 
         System.out.println(content);
+
+        return content;
     }
 }

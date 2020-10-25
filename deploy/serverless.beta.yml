@@ -36,6 +36,13 @@ functions:
       - http:
           path: /json
           method: get
+  file:
+    handler: com.eandbsolutions.FileHandler
+    description: File pathing checker
+    events:
+      - http:
+          path: /file
+          method: get
 
 plugins:
   - serverless-domain-manager
