@@ -16,6 +16,7 @@ provider:
       rateLimit: 10
   environment:
     NODE_ENV: beta
+    LOGICAL_ENV: dev
 
 # you can add packaging information here
 package:
@@ -23,25 +24,32 @@ package:
 
 functions:
   health:
-    handler: com.eandbsolutions.HelloHandler
+    handler: com.eandbsolutions.handlers.HelloHandler
     description: Gateway health check. Responds with current time and a short message.
     events:
       - http:
           path: /health
           method: get
   json:
-    handler: com.eandbsolutions.JsonHandler
+    handler: com.eandbsolutions.handlers.JsonHandler
     description: Json checker
     events:
       - http:
           path: /json
-          method: get
+          method: post
   file:
-    handler: com.eandbsolutions.FileHandler
+    handler: com.eandbsolutions.handlers.FileHandler
     description: File pathing checker
     events:
       - http:
           path: /file
+          method: get
+  env:
+    handler: com.eandbsolutions.handlers.EnvHandler
+    description: Used to check for Environment variables in AWS Lambda
+    events:
+      - http:
+          path: /env
           method: get
 
 plugins:

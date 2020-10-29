@@ -1,4 +1,4 @@
-package com.eandbsolutions;
+package com.eandbsolutions.models;
 
 import java.util.Map;
 

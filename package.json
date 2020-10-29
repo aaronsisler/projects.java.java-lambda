@@ -4,10 +4,10 @@
   "description": "This project is a basic Java project that will be packaged and deployed into a AWS Lambda function.",
   "main": "index.js",
   "scripts": {
-    "prebuild": "echo \"Hello I am content!\" > ./src/main/resources/taco.txt",
     "build": "mvn clean install package -P lambda",
     "domain:beta": "sls create_domain --config=./deploy/serverless.beta.yml",
-    "deploy:beta": "npm run build && sls deploy --config=./deploy/serverless.beta.yml"
+    "deploy:beta": "npm run build && sls deploy --config=./deploy/serverless.beta.yml",
+    "make-a-file": "rm -rf ./src/main/resources/taco.txt && echo \"Hello I am content!\" > ./src/main/resources/taco.txt"
   },
   "dependencies": {
     "serverless-domain-manager": "^4.2.0"
