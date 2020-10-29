@@ -1,4 +1,4 @@
-package com.eandbsolutions;
+package com.eandbsolutions.handlers;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
