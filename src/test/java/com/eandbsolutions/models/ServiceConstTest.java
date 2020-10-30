@@ -1,8 +1,11 @@
 package com.eandbsolutions.models;
 
-import org.junit.BeforeClass;
-import org.junit.Before;
+import com.eandbsolutions.services.SwissArmyService;
+import com.eandbsolutions.utils.FoodUtility;
+import com.eandbsolutions.utils.LifeUtility;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -13,8 +16,10 @@ import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ServiceConstTest {
-    private UtilityConst mockUtilityConst;
-    private UtilityConst spyUtilityConst;
+    private FoodUtility mockFoodUtility;
+    private FoodUtility spyFoodUtility;
+    private LifeUtility mockLifeUtility;
+    private LifeUtility spyLifeUtility;
 
     @BeforeClass
     public static void inTheBeginning() {
@@ -39,30 +44,34 @@ public class ServiceConstTest {
     }
 
     @Test
-    public void callUtilityConstThroughMock() {
-        System.out.println("Begin: callUtilityConstThroughMock");
-        // Must set a return for called functions when mock is used
-        mockUtilityConst = mock(UtilityConst.class);
-        when(mockUtilityConst.getTaco()).thenReturn("test-taco");
+    public void callFoodUtilityThroughMock() {
+        System.out.println("Begin: callFoodUtilityThroughMock");
 
-        ServiceConst service = new ServiceConst(mockUtilityConst);
-        String result = service.getThing();
+        // Must set a return for called functions when mock is used
+        mockFoodUtility = mock(FoodUtility.class);
+        when(mockFoodUtility.getFood()).thenReturn("test-taco");
+
+        SwissArmyService swissArmyService = new SwissArmyService(mockFoodUtility, null);
+        String result = swissArmyService.getFood();
         assertEquals("test-taco", result);
-        System.out.println("End: callUtilityConstThroughMock");
+
+        System.out.println("End: callFoodUtilityThroughMock");
     }
 
     @Test
-    public void callUtilityConstThroughSpy() {
-        System.out.println("Begin: callUtilityConstThroughSpy");
+    public void callFoodUtilityThroughSpy() {
+        System.out.println("Begin: callFoodUtilityThroughSpy");
+
         // Internals of 'spy'ed class will still be called
-        spyUtilityConst = spy(UtilityConst.class);
-        ServiceConst service = new ServiceConst(spyUtilityConst);
-        String resultNormal = service.getThing();
+        spyFoodUtility = spy(FoodUtility.class);
+        SwissArmyService swissArmyService = new SwissArmyService(spyFoodUtility, null);
+        String resultNormal = swissArmyService.getFood();
         assertEquals("taco", resultNormal);
 
-        when(spyUtilityConst.getTaco()).thenReturn("test-taco");
-        String resultMocked = service.getThing();
+        when(spyFoodUtility.getFood()).thenReturn("test-taco");
+        String resultMocked = swissArmyService.getFood();
         assertEquals("test-taco", resultMocked);
-        System.out.println("End: callUtilityConstThroughSpy");
+
+        System.out.println("End: callFoodUtilityThroughSpy");
     }
 }
