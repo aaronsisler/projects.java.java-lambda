@@ -1,8 +1,9 @@
-package com.eandbsolutions.models;
+package com.eandbsolutions.services;
 
-import org.junit.BeforeClass;
-import org.junit.Before;
+import com.eandbsolutions.utils.UtilityConst;
 import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -41,6 +42,7 @@ public class ServiceConstTest {
     @Test
     public void callUtilityConstThroughMock() {
         System.out.println("Begin: callUtilityConstThroughMock");
+
         // Must set a return for called functions when mock is used
         mockUtilityConst = mock(UtilityConst.class);
         when(mockUtilityConst.getTaco()).thenReturn("test-taco");
@@ -48,12 +50,14 @@ public class ServiceConstTest {
         ServiceConst service = new ServiceConst(mockUtilityConst);
         String result = service.getThing();
         assertEquals("test-taco", result);
+
         System.out.println("End: callUtilityConstThroughMock");
     }
 
     @Test
     public void callUtilityConstThroughSpy() {
         System.out.println("Begin: callUtilityConstThroughSpy");
+
         // Internals of 'spy'ed class will still be called
         spyUtilityConst = spy(UtilityConst.class);
         ServiceConst service = new ServiceConst(spyUtilityConst);
@@ -63,6 +67,7 @@ public class ServiceConstTest {
         when(spyUtilityConst.getTaco()).thenReturn("test-taco");
         String resultMocked = service.getThing();
         assertEquals("test-taco", resultMocked);
+
         System.out.println("End: callUtilityConstThroughSpy");
     }
 }

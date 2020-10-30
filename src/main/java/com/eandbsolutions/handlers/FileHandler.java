@@ -2,7 +2,7 @@ package com.eandbsolutions.handlers;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import com.eandbsolutions.FileService;
+import com.eandbsolutions.services.FileService;
 import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
 

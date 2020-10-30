@@ -1,4 +1,4 @@
-package com.eandbsolutions.models;
+package com.eandbsolutions.utils;
 
 public class UtilityConst {
     private String taco = "taco";
