@@ -1,6 +1,5 @@
-package com.eandbsolutions.models;
+package com.eandbsolutions.services;
 
-import com.eandbsolutions.services.SwissArmyService;
 import com.eandbsolutions.utils.FoodUtility;
 import com.eandbsolutions.utils.LifeUtility;
 import org.junit.After;
@@ -9,13 +8,15 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
+import org.slf4j.Logger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ServiceConstTest {
+public class SwissArmyServiceTest {
+    private Logger mockLogger;
     private FoodUtility mockFoodUtility;
     private FoodUtility spyFoodUtility;
     private LifeUtility mockLifeUtility;
@@ -30,6 +31,7 @@ public class ServiceConstTest {
     @Before
     public void initialize() {
 //        System.out.println("Before test");
+        mockLogger = mock(Logger.class);
     }
 
     @After
@@ -38,9 +40,16 @@ public class ServiceConstTest {
         System.out.println();
     }
 
-    //    @Test
+    @Test
     public void shouldAnswerWithTrue() {
         assertTrue(true);
+    }
+
+    @Test
+    public void shouldConstruct() {
+        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, spyFoodUtility, null);
+        String resultNormal = swissArmyService.getFood();
+        assertEquals("taco", resultNormal);
     }
 
     @Test
@@ -51,7 +60,7 @@ public class ServiceConstTest {
         mockFoodUtility = mock(FoodUtility.class);
         when(mockFoodUtility.getFood()).thenReturn("test-taco");
 
-        SwissArmyService swissArmyService = new SwissArmyService(mockFoodUtility, null);
+        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, mockFoodUtility, null);
         String result = swissArmyService.getFood();
         assertEquals("test-taco", result);
 
@@ -64,7 +73,7 @@ public class ServiceConstTest {
 
         // Internals of 'spy'ed class will still be called
         spyFoodUtility = spy(FoodUtility.class);
-        SwissArmyService swissArmyService = new SwissArmyService(spyFoodUtility, null);
+        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, spyFoodUtility, null);
         String resultNormal = swissArmyService.getFood();
         assertEquals("taco", resultNormal);
 

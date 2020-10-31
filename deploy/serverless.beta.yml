@@ -51,6 +51,13 @@ functions:
       - http:
           path: /env
           method: get
+  log:
+    handler: com.eandbsolutions.handlers.LogHandler
+    description: Used to check how global logging works
+    events:
+      - http:
+          path: /log
+          method: get
 
 plugins:
   - serverless-domain-manager
