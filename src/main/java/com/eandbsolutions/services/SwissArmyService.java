@@ -1,35 +1,34 @@
 package com.eandbsolutions.services;
 
-import com.eandbsolutions.utils.FoodUtility;
-import com.eandbsolutions.utils.LifeUtility;
+import com.eandbsolutions.utils.FoodUtil;
+import com.eandbsolutions.utils.LifeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class SwissArmyService {
-    //    private Logger logger = LoggerFactory.getLogger(SwissArmyService.class);
     private final Logger logger;
-    private final FoodUtility foodUtility;
-    private final LifeUtility lifeUtility;
+    private final FoodUtil foodUtil;
+    private final LifeUtil lifeUtil;
 
     public SwissArmyService() {
         this.logger = LoggerFactory.getLogger(getClass());
-        this.foodUtility = new FoodUtility();
-        this.lifeUtility = new LifeUtility();
+        this.foodUtil = new FoodUtil();
+        this.lifeUtil = new LifeUtil();
     }
 
-    public SwissArmyService(Logger logger, FoodUtility foodUtility, LifeUtility lifeUtility) {
+    public SwissArmyService(Logger logger, FoodUtil foodUtil, LifeUtil lifeUtil) {
         this.logger = logger;
-        this.foodUtility = foodUtility == null ? new FoodUtility() : foodUtility;
-        this.lifeUtility = lifeUtility == null ? new LifeUtility() : lifeUtility;
+        this.foodUtil = foodUtil;
+        this.lifeUtil = lifeUtil;
 
     }
 
     public String getFood() {
-        return foodUtility.getFood();
+        return foodUtil.getFood();
     }
 
     public int getLife() {
-        return lifeUtility.getLife();
+        return lifeUtil.getLife();
     }
 
     public void fireLogger(String message) {

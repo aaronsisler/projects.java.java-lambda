@@ -1,7 +1,7 @@
 package com.eandbsolutions.services;
 
-import com.eandbsolutions.utils.FoodUtility;
-import com.eandbsolutions.utils.LifeUtility;
+import com.eandbsolutions.utils.FoodUtil;
+import com.eandbsolutions.utils.LifeUtil;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -17,21 +17,21 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class SwissArmyServiceTest {
     private Logger mockLogger;
-    private FoodUtility mockFoodUtility;
-    private FoodUtility spyFoodUtility;
-    private LifeUtility mockLifeUtility;
-    private LifeUtility spyLifeUtility;
+    private FoodUtil mockFoodUtil;
+    private FoodUtil spyFoodUtil;
+    private LifeUtil mockLifeUtil;
+    private LifeUtil spyLifeUtil;
 
     @BeforeClass
     public static void inTheBeginning() {
-//        System.out.println("Before tests");
         System.out.println();
     }
 
     @Before
     public void initialize() {
-//        System.out.println("Before test");
         mockLogger = mock(Logger.class);
+        mockFoodUtil = mock(FoodUtil.class);
+        mockLifeUtil = mock(LifeUtil.class);
     }
 
     @After
@@ -46,21 +46,14 @@ public class SwissArmyServiceTest {
     }
 
     @Test
-    public void shouldConstruct() {
-        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, spyFoodUtility, null);
-        String resultNormal = swissArmyService.getFood();
-        assertEquals("taco", resultNormal);
-    }
-
-    @Test
     public void callFoodUtilityThroughMock() {
         System.out.println("Begin: callFoodUtilityThroughMock");
 
         // Must set a return for called functions when mock is used
-        mockFoodUtility = mock(FoodUtility.class);
-        when(mockFoodUtility.getFood()).thenReturn("test-taco");
+        mockFoodUtil = mock(FoodUtil.class);
+        when(mockFoodUtil.getFood()).thenReturn("test-taco");
 
-        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, mockFoodUtility, null);
+        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, mockFoodUtil, null);
         String result = swissArmyService.getFood();
         assertEquals("test-taco", result);
 
@@ -72,12 +65,12 @@ public class SwissArmyServiceTest {
         System.out.println("Begin: callFoodUtilityThroughSpy");
 
         // Internals of 'spy'ed class will still be called
-        spyFoodUtility = spy(FoodUtility.class);
-        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, spyFoodUtility, null);
+        spyFoodUtil = spy(FoodUtil.class);
+        SwissArmyService swissArmyService = new SwissArmyService(mockLogger, spyFoodUtil, null);
         String resultNormal = swissArmyService.getFood();
         assertEquals("taco", resultNormal);
 
-        when(spyFoodUtility.getFood()).thenReturn("test-taco");
+        when(spyFoodUtil.getFood()).thenReturn("test-taco");
         String resultMocked = swissArmyService.getFood();
         assertEquals("test-taco", resultMocked);
 

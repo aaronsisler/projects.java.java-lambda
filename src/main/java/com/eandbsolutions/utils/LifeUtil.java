@@ -1,6 +1,6 @@
 package com.eandbsolutions.utils;
 
-public class LifeUtility {
+public class LifeUtil {
     private final int life = 42;
 
     public int getLife() {

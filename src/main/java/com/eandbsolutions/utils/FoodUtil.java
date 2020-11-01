@@ -1,6 +1,6 @@
 package com.eandbsolutions.utils;
 
-public class FoodUtility {
+public class FoodUtil {
     private String food = "taco";
 
     public String getFood() {
