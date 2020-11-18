@@ -30,8 +30,8 @@ public class DatabaseService {
     public User getItem() {
         try {
             Region region = Region.US_EAST_1;
-            System.setProperty("aws.accessKeyId", "AKIAZQ7BPRUIDC4FVX6V");
-            System.setProperty("aws.secretAccessKey", "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");
+            System.setProperty("aws.accessKeyId", "");
+            System.setProperty("aws.secretAccessKey", "");
             DynamoDbClient ddb = DynamoDbClient.builder()
                     .region(region)
                     .build();
