@@ -6,6 +6,7 @@
   "scripts": {
     "build": "mvn clean install package -P lambda",
     "domain:beta": "sls create_domain --config=./deploy/serverless.beta.yml",
+    "deploy:beta1": "npm run build && sls deploy --config=./deploy/serverless.beta.yml",
     "deploy:beta": "npm run build && sls deploy --config=./deploy/serverless.beta.yml",
     "make-a-file": "rm -rf ./src/main/resources/taco.txt && echo \"Hello I am content!\" > ./src/main/resources/taco.txt"
   },

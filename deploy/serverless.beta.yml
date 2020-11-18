@@ -58,6 +58,13 @@ functions:
       - http:
           path: /log
           method: get
+  database:
+    handler: com.eandbsolutions.handlers.DatabaseHandler
+    description: Used to check how DDB and aws-sdk works
+    events:
+      - http:
+          path: /database
+          method: get
 
 plugins:
   - serverless-domain-manager

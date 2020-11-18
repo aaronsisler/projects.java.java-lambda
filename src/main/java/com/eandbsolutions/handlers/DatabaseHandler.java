@@ -4,32 +4,35 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
+import com.eandbsolutions.models.User;
+import com.eandbsolutions.services.DatabaseService;
 import com.eandbsolutions.services.SwissArmyService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class LogHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
+public class DatabaseHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
     private SwissArmyService swissArmyService;
+    private DatabaseService databaseService;
 
-    public LogHandler() {
+    public DatabaseHandler() {
         logger = LogManager.getLogger(getClass());
         swissArmyService = new SwissArmyService();
+        databaseService = new DatabaseService();
     }
 
     public ApiGatewayResponse handleRequest(ApiGatewayRequest input, Context context) {
-        context.getLogger().log("Logging from Context logger");
-        logger.info("Logging from Apache logger: Info");
-        logger.warn("Logging from Apache logger: Warn");
-        logger.error("Logging from Apache logger: Error");
         String responseBody;
-        swissArmyService.fireLogger("Hola from handler!");
-        String classpath = System.getProperty("java.class.path");
-        logger.info(classpath);
 
         try {
-            responseBody = "Hello from LogHandler!";
-            return new ApiGatewayResponse(200, responseBody);
+            responseBody = "Hello from DatabaseHandler!";
+            User user = databaseService.getItem();
+            ObjectMapper mapper = new ObjectMapper();
+            //Converting the Object to JSONString
+            String jsonString = mapper.writeValueAsString(user);
+            System.out.println(jsonString);
+            return new ApiGatewayResponse(200, jsonString);
         } catch (Exception e) {
             responseBody = String.format("Error message: %s", e.getMessage());
             return new ApiGatewayResponse(500, responseBody);
