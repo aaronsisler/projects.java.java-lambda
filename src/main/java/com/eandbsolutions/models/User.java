@@ -8,6 +8,25 @@ public class User {
     private String userId;
     private String lastName;
     private String firstName;
+    private String randomFact;
+
+    public User() {
+    }
+
+    public User(String userId, String lastName, String firstName, String randomFact) {
+        this.userId = userId;
+        this.lastName = lastName;
+        this.firstName = firstName;
+        this.randomFact = randomFact;
+    }
+
+    public String getRandomFact() {
+        return randomFact;
+    }
+
+    public void setRandomFact(String randomFact) {
+        this.randomFact = randomFact;
+    }
 
     @DynamoDbPartitionKey
     public String getUserId() {

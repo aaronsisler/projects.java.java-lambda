@@ -18,6 +18,7 @@ import java.util.List;
 
 public class DatabaseService {
     private final Logger logger;
+    private String userId = "101389202411803829037";
 
     public DatabaseService() {
         logger = LogManager.getLogger(getClass());
@@ -30,8 +31,6 @@ public class DatabaseService {
     public User getItem() {
         try {
             Region region = Region.US_EAST_1;
-            System.setProperty("aws.accessKeyId", "");
-            System.setProperty("aws.secretAccessKey", "");
             DynamoDbClient ddb = DynamoDbClient.builder()
                     .region(region)
                     .build();
@@ -39,9 +38,8 @@ public class DatabaseService {
             DynamoDbEnhancedClient enhancedClient = DynamoDbEnhancedClient.builder()
                     .dynamoDbClient(ddb)
                     .build();
-            String tableName = "PAPER_TRAIL_SERVICE_BETA_USERS";
+            String tableName = "JAVA_LAMBDA_TEST";
             DynamoDbTable<User> userTable = enhancedClient.table(tableName, TableSchema.fromBean(User.class));
-            String userId = "101389202411803829037";
             Key userIdKey = Key.builder().partitionValue(userId).build();
             return userTable.getItem(userIdKey);
         } catch (Exception e) {
