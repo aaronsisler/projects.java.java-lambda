@@ -65,12 +65,19 @@ functions:
       - http:
           path: /database
           method: get
-  mapper:
-    handler: com.eandbsolutions.handlers.MapperHandler
+  mapper-save:
+    handler: com.eandbsolutions.handlers.MapperSaveHandler
     description: Used to check how DDB and aws-sdk works with DynamoDBMapper
     events:
       - http:
-          path: /mapper
+          path: /mapper-save
+          method: get
+  mapper-get:
+    handler: com.eandbsolutions.handlers.MapperGetHandler
+    description: Used to check how DDB and aws-sdk works with DynamoDBMapper
+    events:
+      - http:
+          path: /mapper-get
           method: get
 
 plugins:

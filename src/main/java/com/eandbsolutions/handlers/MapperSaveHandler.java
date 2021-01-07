@@ -9,11 +9,11 @@ import com.eandbsolutions.services.MapperService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-public class MapperHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
+public class MapperSaveHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
     private MapperService mapperService;
 
-    public MapperHandler() {
+    public MapperSaveHandler() {
         logger = LogManager.getLogger(getClass());
         mapperService = new MapperService();
     }
@@ -21,7 +21,7 @@ public class MapperHandler implements RequestHandler<ApiGatewayRequest, ApiGatew
     public ApiGatewayResponse handleRequest(ApiGatewayRequest input, Context context) {
         String responseBody;
 
-        Employee employee = new Employee("3", "Tom", 89000, true);
+        Employee employee = new Employee("4", "Jerry", 89123, true);
 
         try {
             mapperService.saveEmployee(employee);

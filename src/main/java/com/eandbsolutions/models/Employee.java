@@ -1,21 +1,19 @@
 package com.eandbsolutions.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperFieldModel;
+import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
 
-@DynamoDBTable(tableName = "JAVA_MAPPER_TEST")
 public class Employee {
-    @DynamoDBHashKey(attributeName = "employeeId")
+
     private String employeeId;
-
-    @DynamoDBAttribute(attributeName = "name")
     private String name;
-
-    @DynamoDBAttribute(attributeName = "salary")
     private int salary;
-
-    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
-    @DynamoDBAttribute(attributeName = "isEmployed")
     private boolean isEmployed;
+
+    public Employee() {
+    }
 
     public Employee(String employeeId, String name, int salary, boolean isEmployed) {
         this.employeeId = employeeId;
@@ -24,6 +22,7 @@ public class Employee {
         this.isEmployed = isEmployed;
     }
 
+    @DynamoDBHashKey(attributeName = "employeeId")
     public String getEmployeeId() {
         return employeeId;
     }
@@ -32,6 +31,7 @@ public class Employee {
         this.employeeId = employeeId;
     }
 
+    @DynamoDBAttribute(attributeName = "name")
     public String getName() {
         return name;
     }
@@ -40,6 +40,7 @@ public class Employee {
         this.name = name;
     }
 
+    @DynamoDBAttribute(attributeName = "salary")
     public int getSalary() {
         return salary;
     }
@@ -48,6 +49,8 @@ public class Employee {
         this.salary = salary;
     }
 
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.BOOL)
+    @DynamoDBAttribute(attributeName = "isEmployed")
     public boolean getIsEmployed() {
         return isEmployed;
     }
