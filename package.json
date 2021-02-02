@@ -13,7 +13,7 @@
     "serverless-domain-manager": "^4.2.0"
   },
   "devDependencies": {
-    "serverless": "^2.8.0"
+    "serverless": "^2.21.1"
   },
   "repository": {
     "type": "git",

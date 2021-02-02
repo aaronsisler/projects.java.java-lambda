@@ -6,6 +6,8 @@ provider:
   stage: beta
   region: us-east-1
   role: arn:aws:iam::654918520080:role/APIG-LAMBDA-DDB
+  apiGateway:
+    shouldStartNameWithService: true
   usagePlan:
     quota:
       limit: 500
