@@ -1,19 +1,15 @@
 package com.eandbsolutions.handlers;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import static org.junit.Assert.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class HelloHandlerTest {
-    @Test
+    //    @Test
     public void shouldAnswerWithTrue() {
         assertTrue(true);
     }
 
-//    @Test
+    //    @Test
     public void onSuccessShouldReturnCorrectMessage() {
 //        Context context = mock(Context.class);
 //        String result = new HelloHandler().handleRequest(null, context);

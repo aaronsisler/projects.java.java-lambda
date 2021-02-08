@@ -3,18 +3,12 @@ package com.eandbsolutions.services;
 import com.eandbsolutions.utils.FoodUtil;
 import com.eandbsolutions.utils.LifeUtil;
 import org.apache.logging.log4j.Logger;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.class)
 public class SwissArmyServiceTest {
     private Logger mockLogger;
     private FoodUtil mockFoodUtil;
@@ -22,32 +16,32 @@ public class SwissArmyServiceTest {
     private LifeUtil mockLifeUtil;
     private LifeUtil spyLifeUtil;
 
-    @BeforeClass
+    //    @BeforeClass
     public static void inTheBeginning() {
-        System.out.println();
+//        System.out.println();
     }
 
-    @Before
+    //    @Before
     public void initialize() {
         mockLogger = mock(Logger.class);
         mockFoodUtil = mock(FoodUtil.class);
         mockLifeUtil = mock(LifeUtil.class);
     }
 
-    @After
+    //    @After
     public void teardown() {
 //        System.out.println("After test");
-        System.out.println();
+//        System.out.println();
     }
 
-    @Test
+    //    @Test
     public void shouldAnswerWithTrue() {
         assertTrue(true);
     }
 
-    @Test
+    //    @Test
     public void callFoodUtilityThroughMock() {
-        System.out.println("Begin: callFoodUtilityThroughMock");
+//        System.out.println("Begin: callFoodUtilityThroughMock");
 
         // Must set a return for called functions when mock is used
         mockFoodUtil = mock(FoodUtil.class);
@@ -57,12 +51,12 @@ public class SwissArmyServiceTest {
         String result = swissArmyService.getFood();
         assertEquals("test-taco", result);
 
-        System.out.println("End: callFoodUtilityThroughMock");
+//        System.out.println("End: callFoodUtilityThroughMock");
     }
 
-    @Test
+    //    @Test
     public void callFoodUtilityThroughSpy() {
-        System.out.println("Begin: callFoodUtilityThroughSpy");
+//        System.out.println("Begin: callFoodUtilityThroughSpy");
 
         // Internals of 'spy'ed class will still be called
         spyFoodUtil = spy(FoodUtil.class);
@@ -74,6 +68,6 @@ public class SwissArmyServiceTest {
         String resultMocked = swissArmyService.getFood();
         assertEquals("test-taco", resultMocked);
 
-        System.out.println("End: callFoodUtilityThroughSpy");
+//        System.out.println("End: callFoodUtilityThroughSpy");
     }
 }
