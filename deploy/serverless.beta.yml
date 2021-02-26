@@ -25,6 +25,9 @@ package:
   artifact: target/projects-java-lambda.jar
 
 functions:
+  authorizer:
+    handler: com.eandbsolutions.handlers.AuthHandler
+
   health:
     handler: com.eandbsolutions.handlers.HelloHandler
     description: Gateway health check. Responds with current time and a short message.
@@ -67,6 +70,11 @@ functions:
       - http:
           path: /database
           method: get
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 3600
+            type: request
+
   mapper-save:
     handler: com.eandbsolutions.handlers.MapperSaveHandler
     description: Used to check how DDB and aws-sdk works with DynamoDBMapper
@@ -81,6 +89,9 @@ functions:
       - http:
           path: /mapper-get
           method: get
+
+  authFn:
+    handler: com.eandbsolutions.handlers.AuthHandler
 
 plugins:
   - serverless-domain-manager
