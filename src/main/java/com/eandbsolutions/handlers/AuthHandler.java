@@ -46,13 +46,13 @@ public class AuthHandler implements RequestHandler<Map<String, Object>, Map<Stri
         statementOne.put("Resource", resource);
         policyDocument.put("Statement", new Object[]{statementOne});
         authResponse.put("policyDocument", policyDocument);
-        if ("Allow".equals(effect)) {
-            Map<String, Object> context = new HashMap<>();
-            context.put("key", "value");
-            context.put("numKey", Long.valueOf(1L));
-            context.put("boolKey", Boolean.TRUE);
-            authResponse.put("context", context);
-        }
+//        if ("Allow".equals(effect)) {
+//            Map<String, Object> context = new HashMap<>();
+//            context.put("key", "value");
+//            context.put("numKey", Long.valueOf(1L));
+//            context.put("boolKey", Boolean.TRUE);
+//            authResponse.put("context", context);
+//        }
         return authResponse;
     }
 }
