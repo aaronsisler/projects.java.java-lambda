@@ -24,7 +24,7 @@ public class AuthHandler implements RequestHandler<Map<String, Object>, Map<Stri
         String resource = (String) event.get("methodArn");
         String principalId = "123";
         switch (token) {
-            case "Bearer Allow":
+            case "Bearer Allow-Taco":
                 return generatePolicy(principalId, "Allow", resource);
             case "Bearer Deny":
                 return generatePolicy(principalId, "Deny", resource);

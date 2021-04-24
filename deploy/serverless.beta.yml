@@ -35,6 +35,7 @@ functions:
       - http:
           path: /health
           method: get
+
   json:
     handler: com.eandbsolutions.handlers.JsonHandler
     description: Json checker
@@ -42,6 +43,7 @@ functions:
       - http:
           path: /json
           method: post
+
   file:
     handler: com.eandbsolutions.handlers.FileHandler
     description: File pathing checker
@@ -49,6 +51,7 @@ functions:
       - http:
           path: /file
           method: get
+
   env:
     handler: com.eandbsolutions.handlers.EnvHandler
     description: Used to check for Environment variables in AWS Lambda
@@ -56,6 +59,7 @@ functions:
       - http:
           path: /env
           method: get
+
   log:
     handler: com.eandbsolutions.handlers.LogHandler
     description: Used to check how global logging works
@@ -63,6 +67,7 @@ functions:
       - http:
           path: /log
           method: get
+
   database:
     handler: com.eandbsolutions.handlers.DatabaseHandler
     description: Used to check how DDB and aws-sdk works
@@ -81,7 +86,12 @@ functions:
     events:
       - http:
           path: /mapper-save
-          method: get
+          method: post
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 3600
+            type: request
+
   mapper-get:
     handler: com.eandbsolutions.handlers.MapperGetHandler
     description: Used to check how DDB and aws-sdk works with DynamoDBMapper
@@ -89,9 +99,10 @@ functions:
       - http:
           path: /mapper-get
           method: get
-
-  authFn:
-    handler: com.eandbsolutions.handlers.AuthHandler
+          authorizer:
+            name: authorizer
+            resultTtlInSeconds: 3600
+            type: request
 
 plugins:
   - serverless-domain-manager

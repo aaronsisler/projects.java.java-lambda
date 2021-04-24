@@ -6,6 +6,7 @@ import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
 import com.eandbsolutions.models.Employee;
 import com.eandbsolutions.services.MapperService;
+import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -18,10 +19,10 @@ public class MapperSaveHandler implements RequestHandler<ApiGatewayRequest, ApiG
         mapperService = new MapperService();
     }
 
-    public ApiGatewayResponse handleRequest(ApiGatewayRequest input, Context context) {
+    public ApiGatewayResponse handleRequest(ApiGatewayRequest request, Context context) {
         String responseBody;
 
-        Employee employee = new Employee("4", "Jerry", 89123, true);
+        Employee employee = new Gson().fromJson(request.getBody(), Employee.class);
 
         try {
             mapperService.saveEmployee(employee);

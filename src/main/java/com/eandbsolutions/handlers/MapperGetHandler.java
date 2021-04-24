@@ -10,6 +10,9 @@ import com.google.gson.Gson;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Date;
+import java.util.Map;
+
 public class MapperGetHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
     private MapperService mapperService;
@@ -19,11 +22,16 @@ public class MapperGetHandler implements RequestHandler<ApiGatewayRequest, ApiGa
         mapperService = new MapperService();
     }
 
-    public ApiGatewayResponse handleRequest(ApiGatewayRequest input, Context context) {
+    public ApiGatewayResponse handleRequest(ApiGatewayRequest request, Context context) {
         String responseBody;
 
+        Map<String, String> queryParams = request.getQueryStringParameters();
         try {
-            Employee employee = mapperService.getEmployee("3");
+            String employeeId = queryParams.get("employeeId");
+            long startTime = new Date().getTime();
+            Employee employee = mapperService.getEmployee(employeeId);
+            long totalTime = new Date().getTime() - startTime;
+            logger.info("DATABASE_CALL_TIME: " + totalTime);
             responseBody = new Gson().toJson(employee);
 
             return new ApiGatewayResponse(200, responseBody);
