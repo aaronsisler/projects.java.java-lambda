@@ -5,15 +5,15 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
 import com.eandbsolutions.services.SwissArmyService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class LogHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
     private SwissArmyService swissArmyService;
 
     public LogHandler() {
-        logger = LogManager.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
         swissArmyService = new SwissArmyService();
     }
 

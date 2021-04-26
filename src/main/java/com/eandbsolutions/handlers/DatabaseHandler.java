@@ -8,8 +8,8 @@ import com.eandbsolutions.models.User;
 import com.eandbsolutions.services.DatabaseService;
 import com.eandbsolutions.services.SwissArmyService;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class DatabaseHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
@@ -17,7 +17,7 @@ public class DatabaseHandler implements RequestHandler<ApiGatewayRequest, ApiGat
     private DatabaseService databaseService;
 
     public DatabaseHandler() {
-        logger = LogManager.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
         swissArmyService = new SwissArmyService();
         databaseService = new DatabaseService();
     }

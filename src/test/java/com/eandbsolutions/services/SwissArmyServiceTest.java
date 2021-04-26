@@ -2,7 +2,7 @@ package com.eandbsolutions.services;
 
 import com.eandbsolutions.utils.FoodUtil;
 import com.eandbsolutions.utils.LifeUtil;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;

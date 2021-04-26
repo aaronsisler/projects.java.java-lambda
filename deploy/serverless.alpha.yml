@@ -3,7 +3,7 @@ service: projects-java-lambda
 provider:
   name: aws
   runtime: java8
-  stage: beta
+  stage: alpha
   region: us-east-1
   role: arn:aws:iam::654918520080:role/APIG-LAMBDA-DDB
   apiGateway:
@@ -17,7 +17,7 @@ provider:
       burstLimit: 20
       rateLimit: 10
   environment:
-    NODE_ENV: beta
+    NODE_ENV: alpha
     LOGICAL_ENV: dev
 
 # you can add packaging information here
@@ -27,7 +27,6 @@ package:
 functions:
   authorizer:
     handler: com.eandbsolutions.handlers.AuthHandler
-    # provisionedConcurrency: 2
 
   health:
     handler: com.eandbsolutions.handlers.HelloHandler
@@ -96,7 +95,6 @@ functions:
   mapper-get:
     handler: com.eandbsolutions.handlers.MapperGetHandler
     description: Used to check how DDB and aws-sdk works with DynamoDBMapper
-    # provisionedConcurrency: 2
     events:
       - http:
           path: /mapper-get
@@ -109,7 +107,6 @@ functions:
   mapper-get-log:
     handler: com.eandbsolutions.handlers.MapperGetLog4jHandler
     description: Used to check how DDB and aws-sdk works with DynamoDBMapper
-    # provisionedConcurrency: 2
     events:
       - http:
           path: /mapper-log
@@ -125,6 +122,6 @@ plugins:
 custom:
   customDomain:
     domainName: java.otterandcow.com
-    basePath: "beta"
-    stage: beta
+    basePath: "alpha"
+    stage: alpha
     createRoute53Record: true

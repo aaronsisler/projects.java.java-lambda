@@ -2,8 +2,8 @@ package com.eandbsolutions.handlers;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,11 +12,10 @@ public class AuthHandler implements RequestHandler<Map<String, Object>, Map<Stri
     private Logger logger;
 
     public AuthHandler() {
-        logger = LogManager.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
     }
 
     public Map<String, Object> handleRequest(Map<String, Object> event, Context context) {
-        logger.info(event);
         Map<String, String> headers = (Map<String, String>) event.get("headers");
         String token = (String) headers.get("Authorization");
 

@@ -5,8 +5,8 @@ import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.model.ListTablesRequest;
 import com.amazonaws.services.dynamodbv2.model.ListTablesResult;
 import com.eandbsolutions.models.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbEnhancedClient;
 import software.amazon.awssdk.enhanced.dynamodb.DynamoDbTable;
 import software.amazon.awssdk.enhanced.dynamodb.Key;
@@ -21,7 +21,7 @@ public class DatabaseService {
     private String userId = "101389202411803829037";
 
     public DatabaseService() {
-        logger = LogManager.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
     }
 
     public DatabaseService(Logger logger) {

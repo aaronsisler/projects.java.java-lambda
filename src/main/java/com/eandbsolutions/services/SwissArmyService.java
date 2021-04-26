@@ -2,16 +2,16 @@ package com.eandbsolutions.services;
 
 import com.eandbsolutions.utils.FoodUtil;
 import com.eandbsolutions.utils.LifeUtil;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class SwissArmyService {
-    private Logger logger;
     private final FoodUtil foodUtil;
     private final LifeUtil lifeUtil;
+    private Logger logger;
 
     public SwissArmyService() {
-        logger = LogManager.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
         foodUtil = new FoodUtil();
         lifeUtil = new LifeUtil();
         fireLogger("Init");
