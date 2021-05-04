@@ -106,19 +106,6 @@ functions:
             resultTtlInSeconds: 3600
             type: request
 
-  mapper-get-log:
-    handler: com.eandbsolutions.handlers.MapperGetLog4jHandler
-    description: Used to check how DDB and aws-sdk works with DynamoDBMapper
-    # provisionedConcurrency: 2
-    events:
-      - http:
-          path: /mapper-log
-          method: get
-          authorizer:
-            name: authorizer
-            resultTtlInSeconds: 3600
-            type: request
-
 plugins:
   - serverless-domain-manager
 
