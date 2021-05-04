@@ -30,7 +30,7 @@ functions:
     # provisionedConcurrency: 2
 
   health:
-    handler: com.eandbsolutions.handlers.HelloHandler
+    handler: com.eandbsolutions.handlers.HealthHandler
     description: Gateway health check. Responds with current time and a short message.
     events:
       - http:
@@ -68,18 +68,6 @@ functions:
       - http:
           path: /log
           method: get
-
-  database:
-    handler: com.eandbsolutions.handlers.DatabaseHandler
-    description: Used to check how DDB and aws-sdk works
-    events:
-      - http:
-          path: /database
-          method: get
-          authorizer:
-            name: authorizer
-            resultTtlInSeconds: 3600
-            type: request
 
   mapper-save:
     handler: com.eandbsolutions.handlers.MapperSaveHandler

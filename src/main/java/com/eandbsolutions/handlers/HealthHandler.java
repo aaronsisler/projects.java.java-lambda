@@ -6,7 +6,7 @@ import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
 import org.joda.time.Instant;
 
-public class HelloHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
+public class HealthHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     public ApiGatewayResponse handleRequest(ApiGatewayRequest input, Context context) {
         context.getLogger().log(String.format("received: {}", input));
         Instant instant = new Instant();

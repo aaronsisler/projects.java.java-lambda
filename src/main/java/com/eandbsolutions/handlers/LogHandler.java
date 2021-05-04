@@ -4,26 +4,24 @@ import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
-import com.eandbsolutions.services.SwissArmyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class LogHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
-    private SwissArmyService swissArmyService;
 
     public LogHandler() {
         logger = LoggerFactory.getLogger(getClass());
-        swissArmyService = new SwissArmyService();
     }
 
     public ApiGatewayResponse handleRequest(ApiGatewayRequest input, Context context) {
         context.getLogger().log("Logging from Context logger");
+
         logger.info("Logging from Apache logger: Info");
         logger.warn("Logging from Apache logger: Warn");
         logger.error("Logging from Apache logger: Error");
+
         String responseBody;
-        swissArmyService.fireLogger("Hola from handler!");
         String classpath = System.getProperty("java.class.path");
         logger.info(classpath);
 
