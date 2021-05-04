@@ -10,6 +10,8 @@ import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Date;
+
 public class MapperSaveHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
     private Logger logger;
     private MapperService mapperService;
@@ -25,7 +27,10 @@ public class MapperSaveHandler implements RequestHandler<ApiGatewayRequest, ApiG
         Employee employee = new Gson().fromJson(request.getBody(), Employee.class);
 
         try {
+            long startTime = new Date().getTime();
             mapperService.saveEmployee(employee);
+            long totalTime = new Date().getTime() - startTime;
+            logger.info("DATABASE_CALL_TIME: " + totalTime);
             return new ApiGatewayResponse(200, "Worked");
         } catch (Exception e) {
             responseBody = String.format("Error message: %s", e.getMessage());

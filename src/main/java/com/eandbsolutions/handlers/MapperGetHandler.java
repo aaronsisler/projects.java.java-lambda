@@ -7,8 +7,8 @@ import com.eandbsolutions.models.ApiGatewayResponse;
 import com.eandbsolutions.models.Employee;
 import com.eandbsolutions.services.MapperService;
 import com.google.gson.Gson;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Date;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class MapperGetHandler implements RequestHandler<ApiGatewayRequest, ApiGa
     private MapperService mapperService;
 
     public MapperGetHandler() {
-        logger = LogManager.getLogger(getClass());
+        logger = LoggerFactory.getLogger(getClass());
         mapperService = new MapperService();
     }
 
