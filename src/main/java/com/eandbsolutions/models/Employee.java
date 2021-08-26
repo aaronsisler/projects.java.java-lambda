@@ -1,9 +1,9 @@
 package com.eandbsolutions.models;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapperFieldModel;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTyped;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import com.eandbsolutions.utils.CompressedConverter;
+
+import java.nio.ByteBuffer;
 
 public class Employee {
 
@@ -11,6 +11,7 @@ public class Employee {
     private String name;
     private int salary;
     private boolean isEmployed;
+    private ByteBuffer compressed;
 
     public Employee() {
     }
@@ -20,6 +21,16 @@ public class Employee {
         this.name = name;
         this.salary = salary;
         this.isEmployed = isEmployed;
+    }
+
+    @DynamoDBAttribute(attributeName = "compressed")
+    @DynamoDBTypeConverted(converter = CompressedConverter.class)
+    public ByteBuffer getCompressed() {
+        return compressed;
+    }
+
+    public void setCompressed(ByteBuffer compressed) {
+        this.compressed = compressed;
     }
 
     @DynamoDBHashKey(attributeName = "employeeId")
@@ -40,6 +51,7 @@ public class Employee {
         this.name = name;
     }
 
+    @DynamoDBTyped(DynamoDBMapperFieldModel.DynamoDBAttributeType.N)
     @DynamoDBAttribute(attributeName = "salary")
     public int getSalary() {
         return salary;

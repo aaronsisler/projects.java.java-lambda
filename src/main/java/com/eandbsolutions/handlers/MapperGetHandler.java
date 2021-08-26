@@ -5,7 +5,9 @@ import com.amazonaws.services.lambda.runtime.RequestHandler;
 import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
 import com.eandbsolutions.models.Employee;
+import com.eandbsolutions.models.EmployeeDto;
 import com.eandbsolutions.services.MapperService;
+import com.eandbsolutions.utils.StringCompressionUtil;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,9 +32,14 @@ public class MapperGetHandler implements RequestHandler<ApiGatewayRequest, ApiGa
             String employeeId = queryParams.get("employeeId");
             long startTime = new Date().getTime();
             Employee employee = mapperService.getEmployee(employeeId);
+            System.out.println("After mapper service");
+            EmployeeDto employeeDto = new EmployeeDto(employee);
+            System.out.println("After EmployeeDto construction");
+            String compressed = StringCompressionUtil.uncompressString(employee.getCompressed());
+            employeeDto.setCompressed(compressed);
             long totalTime = new Date().getTime() - startTime;
             logger.info("DATABASE_CALL_TIME: " + totalTime);
-            responseBody = new Gson().toJson(employee);
+            responseBody = new Gson().toJson(employeeDto);
 
             return new ApiGatewayResponse(200, responseBody);
         } catch (Exception e) {

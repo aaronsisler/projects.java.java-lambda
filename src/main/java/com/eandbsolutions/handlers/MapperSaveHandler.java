@@ -6,10 +6,13 @@ import com.eandbsolutions.models.ApiGatewayRequest;
 import com.eandbsolutions.models.ApiGatewayResponse;
 import com.eandbsolutions.models.Employee;
 import com.eandbsolutions.services.MapperService;
+import com.eandbsolutions.utils.StringCompressionUtil;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.nio.ByteBuffer;
 import java.util.Date;
 
 public class MapperSaveHandler implements RequestHandler<ApiGatewayRequest, ApiGatewayResponse> {
@@ -23,11 +26,27 @@ public class MapperSaveHandler implements RequestHandler<ApiGatewayRequest, ApiG
 
     public ApiGatewayResponse handleRequest(ApiGatewayRequest request, Context context) {
         String responseBody;
-
-        Employee employee = new Gson().fromJson(request.getBody(), Employee.class);
+        Employee employee;
+        long startTime = new Date().getTime();
+        JsonObject json;
+        ByteBuffer compressed = null;
 
         try {
-            long startTime = new Date().getTime();
+            json = new Gson().fromJson(request.getBody(), JsonObject.class);
+            if (json.has("compressed")) {
+                System.out.println("Up here");
+                System.out.println(json.get("compressed").getAsString());
+                compressed = StringCompressionUtil.compressString(json.get("compressed").getAsString());
+                json.remove("compressed");
+            }
+        } catch (Exception e) {
+            responseBody = String.format("Error message: %s", e.getMessage());
+            return new ApiGatewayResponse(500, responseBody);
+        }
+
+        try {
+            employee = new Employee(json.get("employeeId").getAsString(), json.get("name").getAsString(), json.get("salary").getAsInt(), json.get("isEmployed").getAsBoolean());
+            employee.setCompressed(compressed);
             mapperService.saveEmployee(employee);
             long totalTime = new Date().getTime() - startTime;
             logger.info("DATABASE_CALL_TIME: " + totalTime);
